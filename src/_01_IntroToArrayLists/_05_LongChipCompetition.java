@@ -16,7 +16,12 @@ public class _05_LongChipCompetition {
 
 	public static void main(String[] args) {
 		_05_LongChipCompetition lcc = new _05_LongChipCompetition();
-		
+		lcc.initializeBeatles();
+		lcc.getTheBand();
+		for (int i = 0; i < lcc.getTheBand().size(); i++) {
+			System.out.println(lcc.getTheBand());
+		}
+
 	}
 	
 	private void initializeBeatles() {

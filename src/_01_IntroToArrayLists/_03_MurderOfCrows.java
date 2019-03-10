@@ -1,6 +1,8 @@
 package _01_IntroToArrayLists;
 
 
+import java.awt.Component;
+
 /** Copyright The League of Amazing Programmers 2013-2017
  *    Level 3
  *    A Murder of Crows
@@ -18,6 +20,7 @@ import javax.swing.JOptionPane;
 public class _03_MurderOfCrows {
 
     ArrayList<Crow> theMurder = new ArrayList<Crow>();
+    int crowsDead = 0;
 
     public static void main(String[] args) {
         _03_MurderOfCrows murderOfCrows = new _03_MurderOfCrows();
@@ -30,11 +33,17 @@ public class _03_MurderOfCrows {
          * 1. One of the Crows has eaten the diamond. You need to search through the stomach of each Crow, 
          * then print the name of the guilty Crow.
          */
-        for (int i = 0; i < getStomachContents.size(); i++) {
-			
+        for (int i = 0; i < theMurder.size(); i++) {
+			for (int j = 0; j < theMurder.get(i).getStomachContents().size(); j++) {
+				crowsDead++;
+				if(theMurder.get(i).getStomachContents().contains("diamond")) {
+					System.out.println(theMurder.get(i).getName());
+					crowsDead--;
+				}
+			}
 		}
         /* 2. How many innocent crows had to die before the diamond was found? */
-    	
+    		System.out.println(crowsDead);
     }
 
     private void initializeCrows() {
