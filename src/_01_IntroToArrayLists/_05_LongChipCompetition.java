@@ -18,9 +18,19 @@ public class _05_LongChipCompetition {
 		_05_LongChipCompetition lcc = new _05_LongChipCompetition();
 		lcc.initializeBeatles();
 		lcc.getTheBand();
-		for (int i = 0; i < lcc.getTheBand().size(); i++) {
-			System.out.println(lcc.getTheBand());
+		Chip chip = new Chip(0);
+		int chipOwner = 0;
+		ArrayList<Chip> ch;
+		for (int i = 0; i < lcc.theBeatles.size(); i++) {
+			ch = lcc.theBeatles.get(i).getChips();
+			for (int j = 0; j < ch.size(); j++) {
+				if(ch.get(j).getLength() > chip.getLength()) {
+					chip = ch.get(j);
+					chipOwner = i;
+				}
+			}
 		}
+		System.out.println(lcc.theBeatles.get(chipOwner).getName() + " has the longest chip.");
 
 	}
 	
