@@ -42,7 +42,7 @@ public class _02_TextUndoRedo implements KeyListener {
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.getContentPane().add(panel);
 	frame.addKeyListener(this);
-	label.setText(typedChar);
+	label.setText("");
 	frame.pack();
 	}
 	
@@ -55,20 +55,32 @@ public class _02_TextUndoRedo implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		char keyPressed = e.getKeyChar();
 		// TODO Auto-generated method stub
-		typedChar += keyPressed;
-		label.setText(typedChar);
-		if(keyPressed != KeyEvent.VK_BACK_SPACE && keyPressed != KeyEvent.VK_SPACE) {
+		if(keyPressed != KeyEvent.VK_BACK_SPACE && keyPressed != KeyEvent.VK_ENTER) {
+			label.setText(typedChar);
 			stringLength++;
+			typedChar += keyPressed;
 		}
 		if(keyPressed == KeyEvent.VK_BACK_SPACE){
-			charStack.add(typedChar.charAt(typedChar.length() - 1));
+			System.out.println(typedChar);
+			//charStack.add(typedChar.charAt(typedChar.length() - 1));
+			System.out.println("print" + typedChar.charAt(typedChar.length() - 1));
+			charStack.push(typedChar.charAt(typedChar.length() - 1));
 			System.out.println("backspace");
 			System.out.println(typedChar.length());
 			typedChar = typedChar.substring(0, stringLength - 1);
 			stringLength--;
 			label.setText("");
 			label.setText(typedChar);
-			System.out.println(charStack);
+			System.out.println("stack" + charStack);
+			
+		}
+		if(keyPressed == KeyEvent.VK_ENTER) {
+			
+			char poppedChar = charStack.pop();
+			System.out.println("stack" + charStack);
+			typedChar += poppedChar;
+			label.setText(typedChar);
+			
 		}
 		
 	}

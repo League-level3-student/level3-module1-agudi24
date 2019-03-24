@@ -20,8 +20,14 @@ public class _03_TestMatchingBrackets {
 
 	// USE A STACK TO COMPLETE THE METHOD FOR CHECKING IF EVERY OPENING BRACKET HAS A MATCHING CLOSING BRACKET
 	private boolean doBracketsMatch(String b) {
-		
+		Stack<String> brackets = new Stack<String>();
+		brackets.push(b);
+		if(brackets.contains("{}")) {
+		return true;
+		}
+		else {
 		return false;
+		}
 	}
 
 }
