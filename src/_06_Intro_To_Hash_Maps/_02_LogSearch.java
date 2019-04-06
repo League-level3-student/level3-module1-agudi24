@@ -1,7 +1,22 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class _02_LogSearch {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class _02_LogSearch implements ActionListener{
+	JButton button1 = new JButton("Add Entry");  
+	JButton button2 = new JButton("Search By ID");  
+	JButton button3 = new JButton("View List");
+	String IDNum;
+	String IDName;
+	int IDNumber;
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
@@ -29,5 +44,42 @@ public class _02_LogSearch {
 	 * 				is not in the list. 
 	 *
 	 * */
-	
+	public static void main(String[] args) {
+		_02_LogSearch ls = new _02_LogSearch();
+		ls.setup();
+	}
+	HashMap<Integer, String> personIDs = new HashMap<Integer, String>();
+	public void setup() {
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel();
+		frame.setVisible(true);
+		panel.add(label);
+		panel.add(button1);
+		button1.addActionListener(this);
+		panel.add(button2);
+		button2.addActionListener(this);
+		panel.add(button3);
+		button3.addActionListener(this);
+		frame.add(panel);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == button1) {
+			IDNum = JOptionPane.showInputDialog("Enter an ID number:");
+			IDNumber = Integer.parseInt(IDNum);
+			IDName = JOptionPane.showInputDialog("Enter a name:");
+			personIDs.put(IDNumber, IDName);
+		}
+		if(e.getSource() == button2) {
+			IDNum = JOptionPane.showInputDialog("Enter an ID number:");
+			IDNumber = Integer.parseInt(IDNum);
+			if(personIDs.containsKey(IDNumber)) {
+				JOptionPane.showMessageDialog(null, personIDs.get(IDNumber));
+			}
+		}
+	}
 }
