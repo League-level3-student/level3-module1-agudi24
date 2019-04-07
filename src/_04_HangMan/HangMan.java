@@ -29,15 +29,20 @@ public class HangMan implements ActionListener{
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
+		Utilities.readRandomLineFromFile("dictionary.txt");
+		
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == button) {
 			String question = JOptionPane.showInputDialog("Enter the number of words you want:");
-			words.push(question);
-			//System.out.println(question);
-			System.out.println(words.pop());
+			int questionNum = Integer.parseInt(question);
+			for (int i = 0; i < questionNum; i++) {
+				words.push(Utilities.readRandomLineFromFile("dictionary.txt"));
+			}
+			System.out.println(words);
 		}
 	}
 	

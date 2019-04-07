@@ -24,11 +24,15 @@ public class _03_TestMatchingBrackets {
 		Stack<Character> brackets = new Stack<Character>();
 		for(int i = 0; i < b.length(); i++) {
 			brackets.push(b.charAt(i));
+			
 		}
 		int matched = 0;
-		System.out.println(brackets.pop());
-		for(int i = 0; i <= brackets.size(); i++) {
-			char popped = brackets.pop();
+		if(brackets.peek() == '{'){
+			return false;
+		}
+		for(int i = brackets.size() - 1; i >= 0; i--) {
+			System.out.println(brackets + " " + brackets.size());
+			Character popped = brackets.pop();
 			System.out.println(popped);
 			if(popped == '}') {
 				matched++;
@@ -37,7 +41,7 @@ public class _03_TestMatchingBrackets {
 				matched--;
 			}
 		}
-		System.out.println(matched);
+		System.out.println("Matched " + matched);
 		if(matched == 0) {
 			return true;
 		}
