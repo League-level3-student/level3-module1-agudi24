@@ -1,5 +1,6 @@
 package _04_HangMan;
 
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Stack;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 public class HangMan implements ActionListener{
 	JButton button = new JButton();
 	Stack<String> words = new Stack<String>();
+	JLabel label = new JLabel();
+	String numDash = "";
 	public static void main(String[] args) {
 		HangMan hm = new HangMan();
 		hm.setup();
@@ -20,7 +23,6 @@ public class HangMan implements ActionListener{
 	public void setup() {
 		JFrame frame = new JFrame("Hangman!");
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel();
 		button.setText("Click for a question!");
 		button.addActionListener(this);
 		frame.setVisible(true);
@@ -29,7 +31,6 @@ public class HangMan implements ActionListener{
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
-		Utilities.readRandomLineFromFile("dictionary.txt");
 		
 		
 	}
@@ -42,8 +43,15 @@ public class HangMan implements ActionListener{
 			for (int i = 0; i < questionNum; i++) {
 				words.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 			}
-			System.out.println(words);
+			String poppedWord = words.pop();
+			System.out.println(poppedWord);
+			for (int i = 0; i < poppedWord.length(); i++) {
+			numDash += "_ ";
+			}
+			label.setText(numDash);
+			button.setVisible(false);
 		}
+
 	}
 	
 	
