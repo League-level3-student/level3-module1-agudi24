@@ -3,6 +3,9 @@ package _04_HangMan;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import javax.swing.JButton;
@@ -11,11 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class HangMan implements ActionListener{
+public class HangMan implements ActionListener, KeyListener{
 	JButton button = new JButton();
 	Stack<String> words = new Stack<String>();
 	JLabel label = new JLabel();
 	String numDash = "";
+	ArrayList<Character> charWords = new ArrayList<Character>();
+	Character[] character;
 	public static void main(String[] args) {
 		HangMan hm = new HangMan();
 		hm.setup();
@@ -25,6 +30,7 @@ public class HangMan implements ActionListener{
 		JPanel panel = new JPanel();
 		button.setText("Click for a question!");
 		button.addActionListener(this);
+		frame.addKeyListener(this);
 		frame.setVisible(true);
 		panel.add(label);
 		panel.add(button);
@@ -46,12 +52,39 @@ public class HangMan implements ActionListener{
 			String poppedWord = words.pop();
 			System.out.println(poppedWord);
 			for (int i = 0; i < poppedWord.length(); i++) {
-			numDash += "_ ";
+			charWords.add(poppedWord.charAt(i));
 			}
+			for (Character character : charWords) {
+				character = '_';
+				numDash += character + " ";
+			}
+			System.out.println(charWords);
 			label.setText(numDash);
 			button.setVisible(false);
 		}
 
+
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		char keyPressed = e.getKeyChar();
+		for (int i = 0; i < charWords.size(); i++) {
+			if(keyPressed == charWords.get(i)) {
+				numDash.charAt(i);
+				label.setText(numDash);
+			}
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
