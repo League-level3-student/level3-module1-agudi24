@@ -19,8 +19,9 @@ public class HangMan implements ActionListener, KeyListener{
 	Stack<String> words = new Stack<String>();
 	JLabel label = new JLabel();
 	String numDash = "";
+	
+	ArrayList<String> numDashArray = new ArrayList<String>();
 	ArrayList<Character> charWords = new ArrayList<Character>();
-	Character[] character;
 	public static void main(String[] args) {
 		HangMan hm = new HangMan();
 		hm.setup();
@@ -55,12 +56,19 @@ public class HangMan implements ActionListener, KeyListener{
 			charWords.add(poppedWord.charAt(i));
 			}
 			for (Character character : charWords) {
-				character = '_';
-				numDash += character + " ";
+				//character = '_';
+				numDash += '_' + " ";
+				
+				for (int i = 0; i < charWords.size(); i++) {
+					character = charWords.get(i);
+				}
 			}
 			System.out.println(charWords);
-			label.setText(numDash);
+			numDashArray.add(numDash);
+			System.out.println(numDashArray);
 			button.setVisible(false);
+			numDash = numDashArray.toString();
+			label.setText(numDash);
 		}
 
 
@@ -76,9 +84,9 @@ public class HangMan implements ActionListener, KeyListener{
 		char keyPressed = e.getKeyChar();
 		for (int i = 0; i < charWords.size(); i++) {
 			if(keyPressed == charWords.get(i)) {
-				numDash.charAt(i);
-				label.setText(numDash);
+				System.out.println(charWords.get(i));
 			}
+			
 		}
 	}
 	@Override
