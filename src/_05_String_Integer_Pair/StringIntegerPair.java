@@ -18,7 +18,8 @@ public class StringIntegerPair {
 		//   passed in value and return from the method.
 		for (int i = 0; i < keys.length; i++) {
 			if(keys.equals(key)) {
-				 key.length() = value;
+				
+				
 			}
 		}
 		//B. create a String array that is one element longer than the keys

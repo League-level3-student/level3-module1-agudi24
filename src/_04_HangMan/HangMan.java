@@ -16,9 +16,13 @@ import javax.swing.JPanel;
 
 public class HangMan implements ActionListener, KeyListener {
 	JButton button = new JButton();
+	JButton playAgainButton = new JButton();
 	Stack<String> words = new Stack<String>();
 	JLabel label = new JLabel();
 	JLabel scoreLabel = new JLabel();
+	int score = 0;
+	JFrame frame = new JFrame("Hangman!");
+	JPanel panel = new JPanel();
 	String numDash = "";
 	int letterGuessedRight = 0;
 	ArrayList<String> numDashArray = new ArrayList<String>();
@@ -26,14 +30,13 @@ public class HangMan implements ActionListener, KeyListener {
 	ArrayList<String> answerWord = new ArrayList<String>();
 	int numLives = 10;
 	boolean wrongAnswer = true;
+
 	public static void main(String[] args) {
 		HangMan hm = new HangMan();
 		hm.setup();
 	}
 
 	public void setup() {
-		JFrame frame = new JFrame("Hangman!");
-		JPanel panel = new JPanel();
 		button.setText("Click for a question!");
 		button.addActionListener(this);
 		frame.addKeyListener(this);
@@ -43,23 +46,10 @@ public class HangMan implements ActionListener, KeyListener {
 		panel.add(scoreLabel);
 		panel.add(button);
 		frame.add(panel);
+		playAgainButton.addActionListener(this);
+		playAgainButton.setText("Click to play again");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == button) {
-			String question = JOptionPane.showInputDialog("Enter the number of words you want:");
-			int questionNum = Integer.parseInt(question);
-			for (int i = 0; i < questionNum; i++) {
-				words.push(Utilities.readRandomLineFromFile("dictionary.txt"));
-			}
-			nextWord();
-		}
-		
 
 	}
 
@@ -82,19 +72,51 @@ public class HangMan implements ActionListener, KeyListener {
 				label.setText(numDashArray.toString());
 				letterGuessedRight++;
 				wrongAnswer = false;
-			} 
-			//letterGuessedRight == charWords.size()
-			if(!numDashArray.contains("_")) {
+			}
+			// letterGuessedRight == charWords.size()
+			if (!numDashArray.contains("_")) {
+				score++;
 				charWords.clear();
 				numDashArray.clear();
 				nextWord();
+				
 			}
 		}
 		System.out.println(wrongAnswer);
-		if(wrongAnswer == true) {
-		numLives--;
-		scoreLabel.setText("Number of Lives: " + numLives);
+		if (wrongAnswer == true) {
+			numLives--;
+			scoreLabel.setText("Number of Lives: " + numLives);
 		}
+		if (numLives == 0) {
+			label.setText("You Lose!");
+			scoreLabel.setText("");
+			panel.add(playAgainButton);
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == button) {
+			String question = JOptionPane.showInputDialog("Enter the number of words you want:");
+			int questionNum = Integer.parseInt(question);
+			for (int i = 0; i < questionNum; i++) {
+				words.push(Utilities.readRandomLineFromFile("dictionary.txt"));
+			}
+			nextWord();
+			System.out.println(questionNum);
+			if (score == questionNum) {
+				label.setText("You Win!");
+				scoreLabel.setText("");
+				panel.add(playAgainButton);
+			}
+		}
+		if (e.getSource() == playAgainButton) {
+			HangMan hangmanAgain = new HangMan();
+			hangmanAgain.setup();
+			nextWord();
+		}
+
 	}
 
 	@Override
@@ -102,6 +124,8 @@ public class HangMan implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 
 	}
+	
+
 	void nextWord() {
 		letterGuessedRight = 0;
 		String poppedWord = words.pop();
