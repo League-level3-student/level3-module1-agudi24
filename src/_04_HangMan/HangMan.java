@@ -79,7 +79,6 @@ public class HangMan implements ActionListener, KeyListener {
 				charWords.clear();
 				numDashArray.clear();
 				nextWord();
-				
 			}
 		}
 		System.out.println(wrongAnswer);
@@ -105,11 +104,6 @@ public class HangMan implements ActionListener, KeyListener {
 			}
 			nextWord();
 			System.out.println(questionNum);
-			if (score == questionNum) {
-				label.setText("You Win!");
-				scoreLabel.setText("");
-				panel.add(playAgainButton);
-			}
 		}
 		if (e.getSource() == playAgainButton) {
 			HangMan hangmanAgain = new HangMan();
@@ -124,14 +118,19 @@ public class HangMan implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 
 	}
-	
 
 	void nextWord() {
 		letterGuessedRight = 0;
-		String poppedWord = words.pop();
-		System.out.println(poppedWord);
-		for (int i = 0; i < poppedWord.length(); i++) {
-			charWords.add(poppedWord.charAt(i));
+		if (!words.isEmpty()) {
+			String poppedWord = words.pop();
+			System.out.println(poppedWord);
+			for (int i = 0; i < poppedWord.length(); i++) {
+				charWords.add(poppedWord.charAt(i));
+			}
+		} else {
+			label.setText("You Win!");
+			scoreLabel.setText("");
+			panel.add(playAgainButton);
 		}
 		for (Character character : charWords) {
 			// character = '_';
