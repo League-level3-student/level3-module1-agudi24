@@ -44,7 +44,7 @@ class StringIntPairTest {
 	@Test
 	void testGetKeysAndValues() {
 		StringIntegerPair sip = new StringIntegerPair();
-		sip.put("ONE", 1);
+
 		sip.put("TWO", 2);
 		sip.put("THREE", 3);
 		sip.put("FOUR", 4);

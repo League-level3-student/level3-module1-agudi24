@@ -110,6 +110,11 @@ public class HangMan implements ActionListener, KeyListener {
 			hangmanAgain.setup();
 			nextWord();
 		}
+		if(words.isEmpty() && wrongAnswer == false) {
+			label.setText("You Win!");
+			scoreLabel.setText("");
+			panel.add(playAgainButton);
+		}
 
 	}
 
