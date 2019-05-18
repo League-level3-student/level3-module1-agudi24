@@ -81,5 +81,10 @@ public class _02_LogSearch implements ActionListener{
 				JOptionPane.showMessageDialog(null, personIDs.get(IDNumber));
 			}
 		}
+		if(e.getSource() == button3) {
+			for (int i = 0; i < personIDs.get(IDNumber).length(); i++) {
+				System.out.println("ID: " + personIDs.get(IDNumber));
+			}
 	}
+}
 }
