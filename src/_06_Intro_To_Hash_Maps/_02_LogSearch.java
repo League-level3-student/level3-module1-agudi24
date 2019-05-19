@@ -3,6 +3,7 @@ package _06_Intro_To_Hash_Maps;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,6 +50,7 @@ public class _02_LogSearch implements ActionListener{
 		ls.setup();
 	}
 	HashMap<Integer, String> personIDs = new HashMap<Integer, String>();
+	
 	public void setup() {
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
@@ -82,9 +84,13 @@ public class _02_LogSearch implements ActionListener{
 			}
 		}
 		if(e.getSource() == button3) {
-			for (int i = 0; i < personIDs.get(IDNumber).length(); i++) {
-				System.out.println("ID: " + personIDs.get(IDNumber));
-			}
+			Iterator<HashMap.Entry<Integer, String>> itr = personIDs.entrySet().iterator();
+			System.out.println(itr.hasNext());
+			System.out.println(personIDs.size());
+			    while(itr.hasNext()) {
+			    	System.out.println("ID: " + itr.next().getKey() + " " + "NAME: " + itr.next().getValue());
+			    }
+				
 	}
 }
 }

@@ -18,8 +18,9 @@ public class StringIntegerPair {
 		//   the passed in String, set the value at that location to the
 		//   passed in value and return from the method.
 		for (int i = 0; i < keys.length; i++) {
-			if(keys[i] == key) {
-				values[i] = i;
+			if(keys[i].equals(key)) {
+				values[i] = value;
+				return;
 			}
 		}
 		//B. create a String array that is one element longer than the keys
@@ -46,7 +47,7 @@ public class StringIntegerPair {
 	//   If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
 		for (int i = 0; i < keys.length; i++) {
-			if(keys[i] == key) {
+			if(keys[i].equals(key)) {
 				return values[i];
 			}
 		}	
@@ -58,7 +59,7 @@ public class StringIntegerPair {
 	//   passed in keys is contained in the keys array
 	public boolean containsKey(String key) {
 		for (int i = 0; i < keys.length; i++) {
-			if(keys[i] == key) {
+			if(keys[i].equals(key)) {
 				return true;
 			}
 		}
@@ -78,11 +79,17 @@ public class StringIntegerPair {
 	
 	//8. Complete the getKeysMethod so it returns the keys as an array
 	public String[] getKeys() {
+		for (int i = 0; i < keys.length; i++) {
+			System.out.println(keys[i]);
+		}
 		return keys;
 	}
 	
 	//9. Complete the getValues so it returns the values as an array
 	public int[] getValues() {
+		for (int i = 0; i < values.length; i++) {
+			System.out.println(values[i]);
+		}
 		return values;
 	}
 }
